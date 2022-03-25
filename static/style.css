@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+}
+
+nav {
+    background-color: var(--orange);
+}
+
+.collapse-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.progress-container {
+    display: flex !important;
+}
+
+.file-progress {
+    border: 2px dotted var(--yellow);
+    margin: .2rem;
+    padding: .2rem .5rem .2rem .5rem;
+}
+
+img,
+svg {
+    margin-top: -3px;
+    margin-left: 1px;
+}
+
+.progress-c {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-weight: bold;
+}
+
+.progress-bar {
+    background-color: var(--orange);
+    height: 12px;
+    border-radius: 5px;
+}
+
+.card-title {
+    text-align: justify;
+}
+
+.card-container {
+    margin: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    max-height: 17rem;
+}
+
+.card-container img {
+    object-fit: cover;
+}
+
+.card-container a {
+    text-decoration: none;
+    color: black;
+}
+
+.abort-pcompleted {
+    display: flex;
+}
+
+.abort-button {
+    border: none;
+    color: #dc3545;
+    background-color: transparent;
+}
+
+.btn-outline-orange {
+    border: 1px solid var(--orange);
+    color: var(--orange);
+}
+
+.btn-outline-orange:hover {
+    background-color: var(--orange);
+    color: white;
+    border-color: var(--yellow);
+}
+
+.footer {
+    background-color: var(--orange);
+    color: white;
+}
