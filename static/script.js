@@ -2,6 +2,10 @@ const form = document.getElementById('form');
 const upload_btn = document.getElementById('upload');
 const input = document.getElementById('input');
 const collapse_btn = document.getElementById('collapse-btn');
+const total_used = Number(document.getElementById('totalused').value);
+
+document.querySelector('.storage-progress-bar').style.width = total_used + '%';
+document.querySelector('.storage-info-text').innerHTML = total_used + '%';
 
 upload_btn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -10,20 +14,26 @@ upload_btn.addEventListener('click', (e) => {
 
 let formdata;
 form.addEventListener('change', (e) => {
-    // console.log(e.target.files);
-    if (document.querySelector('.collapse.show#collapse') == null) collapse_btn.click();
     let input = document.querySelector('input[name="files"]');
     let csrf = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
     for (let i = 0; i < input.files.length; i++) {
         formdata = new FormData();
         let { name, size } = input.files[i];
-        console.log(name.split('.')[name.split('.').length - 1]);
-        formdata.append('csrfmiddlewaretoken', csrf)
-        formdata.append('file', input.files[i])
-        formdata.append('name', name)
-        formdata.append('size', size)
-        formdata.append('extension', name.split('.')[name.split('.').length - 1]) //extension of file being sent
-        upload(name, formdata)
+        size = size / 1024 / 1024
+        size = Math.ceil(size)
+        if (total_used + size > 100) {
+            // prevent upload
+            alert('Sorry your storage limit is reached.The owner of the site cannot afford aws s3 bucket charges so he is not allowing user to upload more than 100 mb')
+            return
+        } else {
+            if (document.querySelector('.collapse.show#collapse') == null) collapse_btn.click();
+            formdata.append('csrfmiddlewaretoken', csrf)
+            formdata.append('file', input.files[i])
+            formdata.append('name', name)
+            formdata.append('size', size)
+            formdata.append('extension', name.split('.')[name.split('.').length - 1]) //extension of file being sent
+            upload(name, formdata)
+        }
     }
     // data = {
     //     method: 'POST',
@@ -46,10 +56,7 @@ function upload(name, datas) {
     progress_contaienr.appendChild(file_progress);
     request = new XMLHttpRequest();
     request.open('POST', '');
-    // console.log(request);
-    request.onload = function(e) {
-        //  console.log(e); 
-    }
+    request.onload = function(e) {}
     request.upload.addEventListener('progress', ({ loaded, total }) => {
         percent_completed = (loaded / total) * 100;
         percent_completed = percent_completed.toFixed(1);
@@ -78,7 +85,6 @@ function upload(name, datas) {
         `
         }
         file_progress.innerHTML = progress_html;
-        // console.log(percent_completed);
     })
     request.send(datas);
 }

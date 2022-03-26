@@ -1,4 +1,14 @@
 {% extends 'base.html' %} {% load static %}{% load humanize %} {% block content %}
+<section class="storage-info">
+    <div class="container mt-1">
+        <h6>Storage Utilized:</h6>
+        <div class="progress-c">
+            <div class="progress-bar storage-progress-bar"></div>
+            <div class="storage-info-text"></div>
+        </div>
+    </div>
+    <hr>
+</section>
 <section class="upload-progress">
     <form id="form">
         <input type="file" hidden name="files" id="input" multiple>
@@ -13,7 +23,7 @@
         </div>
     </div>
 </section>
-
+<input type="hidden" value="{{total_used}}" disabled readonly id="totalused">
 <section class="hidden">
     <form id="form" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -25,7 +35,7 @@
     <div class="card-container">
         {% if files %} {% for file in files %}
         <a href="{{file.file.url}}" target="_blank">
-            <div class="card p-2 m-1" style="width: 15rem;">
+            <div class="card p-2 m-1">
                 {% if file.extension == 'jpg' or file.extension == 'jpeg' or file.extension == 'png' or file.extension == 'webp' %}
                 <img height="170px" src="{{file.file.url}}" class="card-img-top" alt="Folder_img"> {% elif file.extension == 'exe' %}
                 <img height="170px" src="{% static 'images/exe.png' %}" class="card-img-top" alt="Folder_img"> {% elif file.extension == 'zip' %}
@@ -47,4 +57,5 @@
         <h4>No files present upload one.</h4> {% endif %}
     </div>
 </section>
+<script src="{% static 'script.js' %}" defer></script>
 {% endblock content %}

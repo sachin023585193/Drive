@@ -4,6 +4,7 @@ from .decorators import authenticated_user_only,unauthenticated_user_only
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
+from .utils import calc_total_used
 
 # Create your views here.
 @unauthenticated_user_only
@@ -47,9 +48,16 @@ def register(request):
 def index(request):
     context = {}
     if request.method == 'POST' and request.FILES:
-        # Drive.objects.create(file=request.FILES['file'],name=request.POST['name'],size=request.POST['size'],extension=request.POST['extension'])
-        # data = Drive.objects.all().order_by('-uploaded')
-        context = {'files':''}
+        Drive.objects.create(
+            owner=request.user, 
+            file=request.FILES['file'],
+            name=request.POST['name'],
+            size=request.POST['size'],
+            extension=request.POST['extension']
+            )
+    data = Drive.objects.filter(owner=request.user).order_by('-uploaded')
+    total_used = calc_total_used(data)
+    context = {'files':data,'total_used':total_used}
     return render(request,'index.html',context)    
 
 def logout_user(request):

@@ -88,6 +88,10 @@ svg {
     color: var(--orange);
 }
 
+.card.p-2.m-1 {
+    width: 15rem;
+}
+
 .btn-outline-orange:hover {
     background-color: var(--orange);
     color: white;
@@ -129,6 +133,12 @@ svg {
 @media only screen and (max-width:900px) {
     .login_register .container {
         width: 80vw;
+    }
+    .card-container {
+        margin: 2rem 0;
+    }
+    .card {
+        width: 10rem;
     }
 }
 
