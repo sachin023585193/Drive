@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['drive-sasta-version.herokuapp.com']
+ALLOWED_HOSTS = ['drive-sasta-version.herokuapp.com','127.0.0.1']
 
 
 

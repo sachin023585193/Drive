@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %}{% load humanize %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load humanize %} {% block content %} {% for message in messages %} {% include 'message.html' %} {% endfor %}
 <section class="storage-info">
     <div class="container mt-1">
         <h6>Storage Utilized:</h6>
@@ -30,7 +30,6 @@
         <input type="file" id="input" name="files" multiple hidden>
     </form>
 </section>
-{% for message in messages %} {% include 'message.html' %} {% endfor %}
 <section class="main-section">
     <div class="card-container">
         {% if files %} {% for file in files %}
