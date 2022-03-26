@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %}{% load humanize %} {% block content %}
+<!--  -->
+<section class="login_register">
+    <div class="container">
+        {% if template == 'login' %}
+        <form action="{% url 'login' %}" method="POST" class="form-control">
+            {% csrf_token %} {% for message in messages %} {% include 'message.html' %} {% endfor %}
+            <h2>Login</h2>
+            <input required type="text" class="form-control" placeholder="Enter your username" name="username">
+            <input required type="password" class="form-control" placeholder="Enter your password" name="password">
+            <div class="d-grid grid-1">
+                <input type="submit" class="btn btn-outline-warning">
+            </div>
+            <p>Don't have a account? <a href="{% url 'register' %}">Register</a></p>
+        </form>
+        {% else %}
+        <form action="{% url 'register' %}" method="POST" class="form-control">
+            {% csrf_token %}
+            <h2>Register</h2>
+            {% for message in messages %} {% include 'message.html' %} {% endfor %}
+            <input required type="text" class="form-control" name="username" placeholder="Enter your username">
+            <input required type="email" class="form-control" name="email" placeholder="Enter your Email">
+            <input required type="password" class="form-control" name="password1" placeholder="Enter your password">
+            <input required type="password" class="form-control" name="password2" placeholder="Confirm your password">
+            <div class="d-grid grid-1">
+                <input type="submit" class="btn btn-outline-warning">
+            </div>
+            <p>Already have a account? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

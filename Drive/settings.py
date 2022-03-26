@@ -1,16 +1,14 @@
 
-from pathlib import Path
 import os
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
+from pathlib import Path
+from django.contrib.messages import constants as messages
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-SECRET_KEY = 'django-insecure-7!o%c+44(zsc&m=nt65j)s9s@85wgo%2==%klgvpjqh28=i5f@'
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
@@ -106,9 +104,13 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MESSAGE_TAGS = {
+    messages.SUCCESS:'success',
+    messages.ERROR:'danger'
+}
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY =  env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_FILE_OVERWRITE = False
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY =  config('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_FILE_OVERWRITE = False

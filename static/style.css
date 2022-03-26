@@ -57,6 +57,7 @@ svg {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    min-height: 80vh;
 }
 
 .card {
@@ -91,6 +92,56 @@ svg {
     background-color: var(--orange);
     color: white;
     border-color: var(--yellow);
+}
+
+.login_register {
+    min-height: 82vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_register .container {
+    height: 70vh;
+    width: 40vw;
+    border-radius: 12px;
+}
+
+.login_register form {
+    padding-top: 2rem;
+    padding-bottom: 0rem;
+}
+
+.login_register .container input.btn {
+    background-color: var(--orange);
+    border-color: var(--yellow);
+    color: white;
+}
+
+.login_register .container input {
+    margin: 10px 0 10px 0;
+}
+
+.login_register .container input.btn:hover {
+    background-color: var(--yellow);
+}
+
+@media only screen and (max-width:900px) {
+    .login_register .container {
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .login_register .container {
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .login_register .container {
+        width: 95vw;
+    }
 }
 
 .footer {
