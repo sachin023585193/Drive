@@ -11,7 +11,7 @@ upload_btn.addEventListener('click', (e) => {
     e.preventDefault();
     input.click();
 });
-
+let total_size = 0;
 let formdata;
 form.addEventListener('change', (e) => {
     let input = document.querySelector('input[name="files"]');
@@ -21,7 +21,8 @@ form.addEventListener('change', (e) => {
         let { name, size } = input.files[i];
         size = size / 1024 / 1024
         size = Math.ceil(size)
-        if (total_used + size > 100) {
+        total_size = total_size + size
+        if (total_used + total_size > 100) {
             // prevent upload
             alert('Sorry your storage limit is reached.The owner of the site cannot afford aws s3 bucket charges so he is not allowing user to upload more than 100 mb')
             return
